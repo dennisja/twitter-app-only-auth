@@ -29,7 +29,7 @@ twitter
     } else if (err.request) {
       // do something with error due to request
     } else {
-      // check what went wromg
+      // check what went wrong
       console.log(err.message);
     }
   });
@@ -52,7 +52,7 @@ async function getTweets() {
     } else if (err.request) {
       // do something with error due to request
     } else {
-      // check what went wromg
+      // check what went wrong
       console.log(err.message);
     }
   }
