@@ -1,4 +1,4 @@
-const configs = require('./configs');
+const configs = require('./constants');
 const axios = require('axios');
 
 const formatError = (e) => {

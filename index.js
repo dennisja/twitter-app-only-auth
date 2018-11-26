@@ -1,12 +1,12 @@
 const axios = require('axios');
-const configs = require('./configs');
-const { getBearerToken, formatError } = require('./utils');
+const { API_BASE_URL, DEFAULT_ERROR } = require('./constants');
+const { getBearerToken } = require('./utils');
 
 class Twitter {
   constructor(apiKey, apiSecretKey) {
     this._authData = null;
     this._client = axios;
-    this._baseUrl = configs.API_BASE_URL;
+    this._baseUrl = API_BASE_URL;
     this._consumerApiKey = apiKey;
     this._consumerApiSecretKey = apiSecretKey;
   }
@@ -25,23 +25,18 @@ class Twitter {
     }
     const { token_type, access_token, error } = this._authData;
 
-    if (error || token_type != 'bearer') {
-      return {
-        error:
-          'Authentication error: Check that you provided the correct consumer api and secret keys',
-      };
+    if (error || token_type !== 'bearer') {
+      const {
+        errors: [{ message }],
+      } = error || DEFAULT_ERROR;
+      throw new Error(message);
     }
 
     const headers = {
       Authorization: `Bearer ${access_token}`,
     };
-    let response;
-    try {
-      response = await this._client.get(url, { headers });
-    } catch (e) {
-      response = formatError(e);
-    }
-    return response;
+
+    return this._client.get(url, { headers });
   }
 }
 
