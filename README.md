@@ -1,5 +1,7 @@
 # twitter-app-only-auth
 
+[![npm version](https://badge.fury.io/js/twitter-app-only-auth.svg)](https://badge.fury.io/js/twitter-app-only-auth)
+
 Implements twitter [application only authentication](https://developer.twitter.com/en/docs/basics/authentication/overview/application-only) and exposes a method to get all resources an application has access to.
 
 > Currently only works in environments without CORS e.g NodeJs, React Native e.t.c
